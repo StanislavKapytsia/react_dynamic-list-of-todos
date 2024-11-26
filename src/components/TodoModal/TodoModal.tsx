@@ -14,7 +14,7 @@ export const TodoModal: React.FC<Props> = ({
   setSelectedTodo,
 }) => {
   const [loader, setLoader] = useState(true);
-  const [user, setUser] = useState<User | ''>('');
+  const [user, setUser] = useState<User | null>(null);
 
   const { userId, title, completed, id } = selectedTodo;
 
@@ -50,7 +50,7 @@ export const TodoModal: React.FC<Props> = ({
               data-cy="modal-close"
               onClick={() => {
                 setSelectedTodo('');
-                setUser('');
+                setUser(null);
               }}
             />
           </header>
@@ -70,7 +70,9 @@ export const TodoModal: React.FC<Props> = ({
 
               {' by '}
 
-              <a href={`mailto:${user && user.email}`}>{user && user.name}</a>
+              <a href={`mailto:${user ? user.email : 'unavailable'}`}>
+                {user ? user.name : 'unavailable'}
+              </a>
             </p>
           </div>
         </div>

@@ -15,9 +15,9 @@ export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [selectedTodo, setSelectedTodo] = useState<Todo | ''>('');
 
-  const [todoFiler, setTodoFillter] = useState({
+  const [todoFilter, setTodoFilter] = useState({
     input: '',
-    filer: 'all',
+    filter: 'all',
   });
 
   useEffect(() => {
@@ -30,9 +30,9 @@ export const App: React.FC = () => {
   }, []);
 
   const currentTodos = useCallback(() => {
-    const { input, filer } = todoFiler;
+    const { input, filter } = todoFilter;
 
-    if (!input && filer === 'all') {
+    if (!input && filter === 'all') {
       return todos;
     }
 
@@ -41,16 +41,16 @@ export const App: React.FC = () => {
         return false;
       }
 
-      switch (filer) {
+      switch (filter) {
         case 'active':
           return !content.completed;
         case 'completed':
           return content.completed;
         default:
-          return content;
+          return true;
       }
     });
-  }, [todoFiler, todos]);
+  }, [todoFilter, todos]);
 
   return (
     <>
@@ -60,7 +60,7 @@ export const App: React.FC = () => {
             <h1 className="title">Todos:</h1>
 
             <div className="block">
-              <TodoFilter values={todoFiler} set={setTodoFillter} />
+              <TodoFilter values={todoFilter} set={setTodoFilter} />
             </div>
 
             <div className="block">

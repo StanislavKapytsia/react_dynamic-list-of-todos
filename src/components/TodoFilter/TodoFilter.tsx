@@ -3,9 +3,9 @@ import React from 'react';
 interface Props {
   values: {
     input: string;
-    filer: string;
+    filter: string;
   };
-  set: React.Dispatch<React.SetStateAction<{ input: string; filer: string }>>;
+  set: React.Dispatch<React.SetStateAction<{ input: string; filter: string }>>;
 }
 
 type ChangeEvent =
@@ -17,7 +17,7 @@ export const TodoFilter: React.FC<Props> = ({ values, set }) => {
     if (changeValue === 'input') {
       set(prevValue => ({ ...prevValue, input: e.target.value }));
     } else {
-      set(prevValue => ({ ...prevValue, filer: e.target.value }));
+      set(prevValue => ({ ...prevValue, filter: e.target.value }));
     }
   };
 
@@ -28,7 +28,7 @@ export const TodoFilter: React.FC<Props> = ({ values, set }) => {
           <select
             data-cy="statusSelect"
             onChange={e => {
-              handleControl(e, 'filer');
+              handleControl(e, 'filter');
             }}
           >
             <option value="all">All</option>
